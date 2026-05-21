@@ -2,6 +2,7 @@
 import "~/styles/global.css";
 import { useT, pathHelper } from "~/i18n/index.js";
 import { LOCALES, type Locale } from "~/i18n/translations.js";
+import GlobalChrome from "~/components/GlobalChrome.astro";
 
 interface Props {
   locale: Locale;
@@ -94,6 +95,7 @@ const structuredData = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="min-h-screen overflow-x-hidden">
+    <GlobalChrome locale={locale} path={path} />
     <slot />
   </body>
 </html>

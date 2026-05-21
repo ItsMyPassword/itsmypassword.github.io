@@ -1,0 +1,84 @@
+---
+/**
+ * Global chrome: the custom cursor, the brand mark in the top-left,
+ * and the language + theme controls in the top-right.
+ *
+ * Lives at the Layout level (direct child of <body>) so it shares the
+ * root stacking context — sections that scroll past the hero can't
+ * cover it any more, even when they create their own stacking context
+ * via `isolate` or `transform`.
+ *
+ * Also owns the global mouse-tracking script and writes the position
+ * to window.__mouse so the hero's dot grid can read from a single
+ * source of truth.
+ */
+import { useT } from "~/i18n/index.js";
+import type { Locale } from "~/i18n/translations.js";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+interface Props {
+  locale: Locale;
+  /** Path without the locale prefix (e.g. "/"). */
+  path: string;
+}
+
+const { locale, path } = Astro.props;
+const t = useT(locale);
+---
+
+<div class="pointer-events-none fixed inset-7 z-[100] mono-tag">
+  <div class="absolute top-0 left-0 flex items-center gap-2 pointer-events-auto">
+    <span aria-hidden="true" class="block h-2 w-2 border border-current"></span>
+    <span>{t("corner_brand")}</span>
+  </div>
+  <div class="absolute top-0 right-0 flex items-center gap-3 pointer-events-auto">
+    <LanguageSwitcher locale={locale} path={path} />
+    <ThemeToggle />
+  </div>
+</div>
+
+<div
+  id="cursor"
+  aria-hidden="true"
+  class="pointer-events-none fixed top-0 left-0 z-[1000] h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-(--color-ink-1)/60 [mix-blend-mode:difference] opacity-100 transition-opacity duration-200"
+>
+</div>
+
+<script>
+  /**
+   * Hide the system cursor for the whole site and follow the mouse with
+   * the ring. We also publish the position on `window.__mouse` so any
+   * canvas (the hero's dot grid) can read it without registering its own
+   * listener.
+   */
+  declare global {
+    interface Window {
+      __mouse?: { x: number; y: number; active: boolean };
+    }
+  }
+
+  document.documentElement.style.cursor = "none";
+  document.body.style.cursor = "none";
+
+  const cursor = document.getElementById("cursor")!;
+  const state = (window.__mouse = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+    active: false,
+  });
+
+  window.addEventListener("mousemove", (event) => {
+    state.x = event.clientX;
+    state.y = event.clientY;
+    state.active = true;
+    cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%)`;
+  });
+  window.addEventListener("mouseleave", () => {
+    state.active = false;
+    cursor.style.opacity = "0.4";
+  });
+  window.addEventListener("mouseenter", () => {
+    cursor.style.opacity = "1";
+  });
+</script>

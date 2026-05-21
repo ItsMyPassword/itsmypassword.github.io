@@ -1,8 +1,6 @@
 ---
 import { useT } from "~/i18n/index.js";
 import type { Locale } from "~/i18n/translations.js";
-import LanguageSwitcher from "./LanguageSwitcher.astro";
-import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
   locale: Locale;
@@ -31,17 +29,6 @@ const t = useT(locale);
     id="dotgrid"
     aria-hidden="true"
     class="pointer-events-none fixed inset-0 z-[1] h-full w-full"></canvas>
-
-  <div class="pointer-events-none fixed inset-7 z-[5] mono-tag">
-    <div class="absolute top-0 left-0 flex items-center gap-2">
-      <span aria-hidden="true" class="block h-2 w-2 border border-current"></span>
-      <span>{t("corner_brand")}</span>
-    </div>
-    <div class="absolute top-0 right-0 flex items-center gap-3 pointer-events-auto">
-      <LanguageSwitcher locale={locale} path="/" />
-      <ThemeToggle />
-    </div>
-  </div>
 
   <div class="relative z-[2] flex flex-col items-center gap-0">
     <div
@@ -141,36 +128,22 @@ const t = useT(locale);
       </a>
     </div>
   </div>
-
-  <div
-    id="cursor"
-    aria-hidden="true"
-    class="pointer-events-none fixed top-0 left-0 z-[9] h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-(--color-ink-1)/60 [mix-blend-mode:difference] transition-opacity duration-200"
-  >
-  </div>
 </section>
 
 <script>
+  /**
+   * Hero-only animations: the dot grid, the password vapour stream, and
+   * the keycap depress. The mouse position is published by
+   * GlobalChrome.astro on `window.__mouse`, so the grid reads from a
+   * single shared source instead of registering its own listener.
+   */
   const CONFIG = { dotSpacing: 38, dotHoverRadius: 140, streamSpeed: 60 };
 
-  const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2, active: false };
-  const cursorEl = document.getElementById("cursor")!;
-  document.documentElement.style.cursor = "none";
-  document.body.style.cursor = "none";
-
-  window.addEventListener("mousemove", (event) => {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-    mouse.active = true;
-    cursorEl.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%)`;
-  });
-  window.addEventListener("mouseleave", () => {
-    mouse.active = false;
-    cursorEl.style.opacity = "0.4";
-  });
-  window.addEventListener("mouseenter", () => {
-    cursorEl.style.opacity = "1";
-  });
+  const mouse = window.__mouse ?? {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+    active: false,
+  };
 
   (function dotGrid() {
     const canvas = document.getElementById("dotgrid") as HTMLCanvasElement;

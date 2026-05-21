@@ -1,0 +1,96 @@
+---
+import LegalPage from "~/components/LegalPage.astro";
+---
+
+<LegalPage locale="en" title="Privacy policy" lastUpdated="2026-05-20" path="/legal/privacy">
+  <p>
+    ItsMyPassword is designed to collect nothing. This policy describes the
+    data the extension and the website handle, why, and where it goes — which,
+    by design, is nowhere.
+  </p>
+
+  <h2>1. Data we collect</h2>
+  <p>
+    <strong>None.</strong> The extension and the website do not transmit your
+    master password, derived passwords, email address, site domains, per-site
+    configuration, IP address, browsing history, telemetry, crash reports, or
+    any other personal data to the Project or to any third party.
+  </p>
+
+  <h2>2. Data stored locally on your device</h2>
+  <p>
+    The extension stores the following data inside your browser's local
+    extension storage, on your device only:
+  </p>
+  <ul>
+    <li>Per-site derivation profiles (length, character classes, counter, suffix rules). Metadata only — never the derived password itself.</li>
+    <li>Your interface preferences (theme, language).</li>
+    <li>An optional, locally-encrypted hint for your master password if you choose to set one.</li>
+  </ul>
+  <p>
+    This data never leaves your device. You can inspect and erase it at any
+    time from the extension settings or from the browser's extension storage
+    inspector.
+  </p>
+
+  <h2>3. Cookies and trackers</h2>
+  <p>
+    The website does not set cookies and does not embed any third-party
+    analytics, advertising, fingerprinting, or social-media tracker. Open your
+    browser's network inspector while using the site to verify: no requests
+    leave your machine after the initial page load.
+  </p>
+
+  <h2>4. Permissions requested by the extension</h2>
+  <ul>
+    <li>
+      <strong>storage</strong> — to persist per-site derivation profiles
+      locally on your device.
+    </li>
+    <li>
+      <strong>activeTab</strong> — to read the current tab's URL when you
+      explicitly invoke the extension, so it can suggest the right
+      per-site profile. The URL is processed in memory only and never
+      stored or transmitted.
+    </li>
+    <li>
+      <strong>scripting</strong> — to fill the focused password field when
+      you click "fill". The script reads no other data from the page.
+    </li>
+  </ul>
+  <p>
+    The extension does not request network permissions and cannot reach the
+    network from its content scripts.
+  </p>
+
+  <h2>5. Children's privacy</h2>
+  <p>
+    The Service is not directed at children under 13. Because the Service
+    collects no data, no specific children's data is ever processed.
+  </p>
+
+  <h2>6. Your rights</h2>
+  <p>
+    Because no personal data leaves your device, there is no data on our side
+    to access, correct, or erase. Under the GDPR and similar laws, your rights
+    of access, rectification, erasure, restriction, portability, and objection
+    apply to the local data stored by the extension — which you control
+    directly through the extension settings.
+  </p>
+
+  <h2>7. Changes</h2>
+  <p>
+    Material changes to this policy will be reflected by updating the "Last
+    updated" date above and, where appropriate, by an in-extension notice on
+    the next update.
+  </p>
+
+  <h2>8. Contact</h2>
+  <p>
+    For any privacy question, open an issue on the project repository at <a
+      href="https://github.com/ItsMyPassword"
+      target="_blank"
+      rel="noopener noreferrer">github.com/ItsMyPassword</a
+    >.
+  </p>
+</LegalPage>

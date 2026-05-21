@@ -264,6 +264,14 @@ export const STRINGS = {
     fr: "Non. La dérivation, c'est Argon2id, la même fonction mémoire-intensive recommandée par OWASP, appliquée à un petit schéma de mélange public. Tout le code est sur GitHub sous licence MIT, le bundle est reproductible, et l'onglet réseau reste vide quand vous l'utilisez. Vérifiez d'abord, faites confiance ensuite.",
   },
 
+  /* legal */
+  legal_section: { en: "Legal", fr: "Mentions légales" },
+  legal_terms: { en: "Terms of use", fr: "Conditions d'utilisation" },
+  legal_privacy: { en: "Privacy policy", fr: "Politique de confidentialité" },
+  legal_security: { en: "Security & disclosure", fr: "Sécurité & divulgation" },
+  legal_last_updated: { en: "Last updated", fr: "Dernière mise à jour" },
+  legal_back: { en: "Back to home", fr: "Retour à l'accueil" },
+
   /* language switcher */
   lang_switcher_label: { en: "Language", fr: "Langue" },
 } satisfies Record<string, Entry>;

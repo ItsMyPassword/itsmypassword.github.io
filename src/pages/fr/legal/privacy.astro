@@ -1,0 +1,105 @@
+---
+import LegalPage from "~/components/LegalPage.astro";
+---
+
+<LegalPage locale="fr" title="Politique de confidentialité" lastUpdated="2026-05-20" path="/legal/privacy">
+  <p>
+    ItsMyPassword est conçu pour ne rien collecter. Cette politique décrit
+    quelles données l'extension et le site web manipulent, pourquoi, et où
+    elles vont — c'est-à-dire, par conception, nulle part.
+  </p>
+
+  <h2>1. Données collectées</h2>
+  <p>
+    <strong>Aucune.</strong> L'extension et le site web ne transmettent ni
+    votre mot de passe maître, ni les mots de passe dérivés, ni votre
+    adresse email, ni les domaines des sites, ni les configurations par
+    site, ni votre adresse IP, ni votre historique de navigation, ni
+    aucune télémétrie, rapport d'erreur ou autre donnée personnelle, au
+    Projet ni à un tiers.
+  </p>
+
+  <h2>2. Données stockées localement</h2>
+  <p>
+    L'extension stocke les données suivantes dans le stockage local
+    d'extension de votre navigateur, sur votre appareil uniquement :
+  </p>
+  <ul>
+    <li>Les profils de dérivation par site (longueur, classes de caractères, compteur, règles de suffixe). Métadonnées uniquement — jamais le mot de passe dérivé.</li>
+    <li>Vos préférences d'interface (thème, langue).</li>
+    <li>Un indice optionnel et chiffré localement pour votre mot de passe maître, si vous choisissez d'en définir un.</li>
+  </ul>
+  <p>
+    Ces données ne quittent jamais votre appareil. Vous pouvez les
+    inspecter et les effacer à tout moment depuis les paramètres de
+    l'extension ou via l'inspecteur de stockage d'extension du navigateur.
+  </p>
+
+  <h2>3. Cookies et traceurs</h2>
+  <p>
+    Le site web ne dépose aucun cookie et n'intègre aucun analytique
+    tiers, publicité, empreinte numérique ou traceur de réseau social.
+    Ouvrez l'inspecteur réseau de votre navigateur en utilisant le site
+    pour le vérifier : aucune requête ne quitte votre machine après le
+    chargement initial de la page.
+  </p>
+
+  <h2>4. Permissions demandées par l'extension</h2>
+  <ul>
+    <li>
+      <strong>storage</strong> — pour conserver localement les profils de
+      dérivation par site sur votre appareil.
+    </li>
+    <li>
+      <strong>activeTab</strong> — pour lire l'URL de l'onglet courant
+      quand vous activez explicitement l'extension, afin de proposer le
+      bon profil par site. L'URL est traitée en mémoire uniquement, jamais
+      stockée ni transmise.
+    </li>
+    <li>
+      <strong>scripting</strong> — pour remplir le champ mot de passe
+      ciblé quand vous cliquez sur « remplir ». Le script ne lit aucune
+      autre donnée de la page.
+    </li>
+  </ul>
+  <p>
+    L'extension ne demande pas de permission réseau et ne peut pas
+    atteindre le réseau depuis ses scripts de contenu.
+  </p>
+
+  <h2>5. Vie privée des enfants</h2>
+  <p>
+    Le Service n'est pas destiné aux enfants de moins de 13 ans. Comme le
+    Service ne collecte aucune donnée, aucune donnée spécifique aux
+    enfants n'est jamais traitée.
+  </p>
+
+  <h2>6. Vos droits</h2>
+  <p>
+    Comme aucune donnée personnelle ne quitte votre appareil, il n'existe
+    aucune donnée de notre côté à laquelle accéder, à rectifier ou à
+    effacer. Au titre du RGPD et de lois similaires, vos droits d'accès,
+    de rectification, d'effacement, de limitation, de portabilité et
+    d'opposition s'appliquent aux données locales stockées par
+    l'extension — que vous contrôlez directement depuis les paramètres de
+    l'extension.
+  </p>
+
+  <h2>7. Modifications</h2>
+  <p>
+    Les modifications substantielles de cette politique sont reflétées par
+    la mise à jour de la date « Dernière mise à jour » ci-dessus et, le
+    cas échéant, par une notification dans l'extension lors de la
+    prochaine mise à jour.
+  </p>
+
+  <h2>8. Contact</h2>
+  <p>
+    Pour toute question relative à la vie privée, ouvrez un ticket sur le
+    dépôt du projet : <a
+      href="https://github.com/ItsMyPassword"
+      target="_blank"
+      rel="noopener noreferrer">github.com/ItsMyPassword</a
+    >.
+  </p>
+</LegalPage>

@@ -15,17 +15,43 @@ const claims = [
   { label: t("promise_no_telemetry"), body: t("promise_no_telemetry_body") },
   { label: t("promise_oss"), body: t("promise_oss_body") },
 ];
+
+/**
+ * The derivation snippet. Plain text so it survives Astro template parsing
+ * cleanly; colouring is done by a tiny client-side pass on character
+ * classes (keywords, strings, numbers, comments).
+ */
+const snippet = `export async function derive(master, site, email, counter) {
+  const salt = utf8(\`\${site}|\${email}|\${counter}\`);
+  const raw  = await argon2id({ password: master, salt, iterations: 3, memory: 65536, parallelism: 1, hashLength: 32 });
+  return shape(raw, profile);  // length, char classes, suffix rules
+}`;
 ---
 
 <section class="relative isolate border-t border-(--color-ink-5) px-6 py-32">
-  <div class="mx-auto flex w-full max-w-5xl flex-col gap-12">
+  <div class="mx-auto flex w-full max-w-5xl flex-col gap-16">
     <header class="flex max-w-2xl flex-col gap-4">
       <span class="mono-tag">{t("promise_tag")}</span>
-      <h2 class="m-0 text-4xl font-semibold tracking-[-0.025em] text-(--color-ink-0) sm:text-5xl">
+      <h2
+        class="m-0 text-4xl font-semibold tracking-[-0.025em] text-(--color-ink-0) sm:text-5xl"
+      >
         {t("promise_title")}
       </h2>
       <p class="m-0 text-pretty text-(--color-ink-2) sm:text-lg">{t("promise_body")}</p>
     </header>
+
+    <figure class="m-0 flex flex-col items-center gap-3 text-center">
+      <blockquote
+        class="m-0 max-w-3xl text-balance font-semibold tracking-[-0.02em] text-(--color-ink-0)"
+        style="font-size: clamp(28px, 3.4vw, 44px); line-height: 1.15;"
+      >
+        <span aria-hidden="true" class="text-(--color-ink-4)">“</span>{t("pullquote_text")}<span
+          aria-hidden="true"
+          class="text-(--color-ink-4)">”</span
+        >
+      </blockquote>
+      <figcaption class="mono-tag">{t("pullquote_attr")}</figcaption>
+    </figure>
 
     <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {
@@ -39,5 +65,95 @@ const claims = [
         ))
       }
     </ul>
+
+    <div class="flex flex-col gap-4">
+      <div class="rounded-2xl border border-(--color-ink-5) bg-(--color-bg-1) overflow-hidden">
+        <div
+          class="flex items-center justify-between border-b border-(--color-ink-5) px-5 py-3"
+        >
+          <span class="mono-tag">derive.ts</span>
+          <span class="mono-tag opacity-70">argon2id · MIT</span>
+        </div>
+        <pre
+          id="promise-code"
+          class="m-0 overflow-x-auto p-5 font-mono text-[13px] leading-relaxed text-(--color-ink-1)"
+        ><code>{snippet}</code></pre>
+      </div>
+      <div class="flex items-center justify-between gap-4">
+        <span class="text-sm text-(--color-ink-3)">{t("promise_code_caption")}</span>
+        <a
+          href="https://github.com/ItsMyPassword/extension"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm font-medium text-(--color-ink-1) underline-offset-4 transition-colors hover:text-(--color-ink-0) hover:underline"
+        >
+          {t("promise_code_read")} →
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  /**
+   * Light syntax colouring for the derive.ts snippet — keywords, strings,
+   * numbers, comments. Kept inline to avoid pulling in a 400KB highlighter
+   * for four lines of code.
+   */
+  const KEYWORDS = new Set([
+    "export",
+    "async",
+    "function",
+    "const",
+    "return",
+    "await",
+    "let",
+    "if",
+    "else",
+  ]);
+  const KEYWORD_CLASS = "text-(--color-ink-3)";
+  const STRING_CLASS = "text-[oklch(0.55_0.10_30)]";
+  const NUMBER_CLASS = "text-[oklch(0.55_0.12_240)]";
+  const COMMENT_CLASS = "text-(--color-ink-3) italic";
+
+  function escapeHtml(s: string) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function highlight(src: string) {
+    const lines = src.split("\n");
+    return lines
+      .map((line) => {
+        // Comments win the whole tail.
+        const commentIdx = line.indexOf("//");
+        let head = line;
+        let tail = "";
+        if (commentIdx >= 0) {
+          head = line.slice(0, commentIdx);
+          tail = `<span class="${COMMENT_CLASS}">${escapeHtml(line.slice(commentIdx))}</span>`;
+        }
+        // Tokenise the head by words and punctuation.
+        const tokens = head.split(/(\s+|[(){};,]|`[^`]*`|\b\d+\b)/g);
+        const rendered = tokens
+          .map((tok) => {
+            if (tok === "") return "";
+            if (/^\s+$/.test(tok)) return tok;
+            if (/^[(){};,]$/.test(tok)) return escapeHtml(tok);
+            if (/^`[^`]*`$/.test(tok))
+              return `<span class="${STRING_CLASS}">${escapeHtml(tok)}</span>`;
+            if (/^\d+$/.test(tok)) return `<span class="${NUMBER_CLASS}">${tok}</span>`;
+            if (KEYWORDS.has(tok)) return `<span class="${KEYWORD_CLASS}">${tok}</span>`;
+            return escapeHtml(tok);
+          })
+          .join("");
+        return rendered + tail;
+      })
+      .join("\n");
+  }
+
+  const pre = document.getElementById("promise-code");
+  const code = pre?.querySelector("code");
+  if (code !== null && code !== undefined) {
+    code.innerHTML = highlight(code.textContent ?? "");
+  }
+</script>

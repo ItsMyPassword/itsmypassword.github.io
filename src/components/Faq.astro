@@ -1,0 +1,75 @@
+---
+import { useT } from "~/i18n/index.js";
+import type { Locale } from "~/i18n/translations.js";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useT(locale);
+
+const items = [
+  { q: t("faq_q1"), a: t("faq_a1") },
+  { q: t("faq_q2"), a: t("faq_a2") },
+  { q: t("faq_q3"), a: t("faq_a3") },
+  { q: t("faq_q4"), a: t("faq_a4") },
+  { q: t("faq_q5"), a: t("faq_a5") },
+];
+---
+
+<section
+  id="faq"
+  class="relative isolate border-t border-(--color-ink-5) px-6 py-32"
+>
+  <div class="mx-auto flex w-full max-w-4xl flex-col gap-12">
+    <header class="flex max-w-2xl flex-col gap-4">
+      <span class="mono-tag">{t("faq_tag")}</span>
+      <h2
+        class="m-0 text-4xl font-semibold tracking-[-0.025em] text-(--color-ink-0) sm:text-5xl"
+      >
+        {t("faq_title")}
+      </h2>
+      <p class="m-0 text-pretty text-(--color-ink-2) sm:text-lg">{t("faq_body")}</p>
+    </header>
+
+    <ul class="flex flex-col divide-y divide-(--color-ink-5) border-y border-(--color-ink-5)">
+      {
+        items.map((item, i) => (
+          <li>
+            <details class="group faq-item">
+              <summary
+                class="flex cursor-pointer list-none items-baseline gap-6 py-6 transition-colors hover:text-(--color-ink-0)"
+              >
+                <span class="mono-tag shrink-0 w-8">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span class="flex-1 text-lg font-medium tracking-[-0.01em] text-(--color-ink-1) group-hover:text-(--color-ink-0)">
+                  {item.q}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="shrink-0 text-(--color-ink-3) transition-transform duration-300 group-open:rotate-45"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-5 w-5">
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </span>
+              </summary>
+              <div class="pb-6 pl-14 pr-10 text-pretty text-(--color-ink-2) leading-relaxed">
+                {item.a}
+              </div>
+            </details>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Disable the default disclosure marker across browsers. */
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

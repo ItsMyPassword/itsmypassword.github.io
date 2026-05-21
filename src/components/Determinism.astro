@@ -1,0 +1,268 @@
+---
+import { useT } from "~/i18n/index.js";
+import type { Locale } from "~/i18n/translations.js";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useT(locale);
+
+/**
+ * The "magic moment" section. Visitors see three inputs typed in, a
+ * password derived, the screen wiped — then the same inputs produce the
+ * same password again. The exact derivation is faked here (a tiny
+ * deterministic hash) because the real Argon2id demo lives in TrySection
+ * below; this section's job is purely to communicate the principle of
+ * determinism in under five seconds.
+ */
+const scriptedMaster = "correct-horse-battery";
+const scriptedSite = "github.com";
+const scriptedEmail = "ada@example.com";
+---
+
+<section
+  id="determinism"
+  class="relative isolate border-t border-(--color-ink-5) px-6 py-32"
+>
+  <div class="mx-auto flex w-full max-w-5xl flex-col gap-14">
+    <header class="flex max-w-2xl flex-col gap-4">
+      <span class="mono-tag">{t("determinism_tag")}</span>
+      <h2
+        class="m-0 text-4xl font-semibold tracking-[-0.025em] text-(--color-ink-0) sm:text-5xl"
+      >
+        {t("determinism_title")}
+      </h2>
+      <p class="m-0 text-pretty text-(--color-ink-2) sm:text-lg">
+        {t("determinism_body")}
+      </p>
+    </header>
+
+    <div
+      id="determinism-card"
+      class="surface relative flex flex-col gap-6 overflow-hidden p-8 sm:p-10"
+      data-master={scriptedMaster}
+      data-site={scriptedSite}
+      data-email={scriptedEmail}
+    >
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div class="flex flex-col gap-2">
+          <span class="mono-tag">{t("determinism_input_master")}</span>
+          <div
+            class="rounded-lg border border-(--color-ink-5) bg-(--color-bg-0) px-3 py-2 font-mono text-sm text-(--color-ink-1)"
+          >
+            <span data-field="master">·</span><span class="caret" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="mono-tag">{t("determinism_input_site")}</span>
+          <div
+            class="rounded-lg border border-(--color-ink-5) bg-(--color-bg-0) px-3 py-2 font-mono text-sm text-(--color-ink-1)"
+          >
+            <span data-field="site">·</span><span class="caret" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="mono-tag">{t("determinism_input_email")}</span>
+          <div
+            class="rounded-lg border border-(--color-ink-5) bg-(--color-bg-0) px-3 py-2 font-mono text-sm text-(--color-ink-1)"
+          >
+            <span data-field="email">·</span><span class="caret" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center justify-center gap-3">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          class="h-6 w-6 text-(--color-ink-3)"
+          aria-hidden="true"
+        >
+          <path d="M12 4v12"></path>
+          <path d="m6 12 6 6 6-6"></path>
+        </svg>
+        <span class="mono-tag">argon2id</span>
+      </div>
+
+      <div class="relative">
+        <span class="mono-tag block mb-2">{t("determinism_output")}</span>
+        <div
+          class="flex items-center justify-between gap-4 rounded-xl border border-(--color-ink-5) bg-(--color-bg-0) px-4 py-4"
+        >
+          <code
+            data-field="output"
+            class="font-mono text-base sm:text-lg tracking-[0.04em] text-(--color-ink-0) break-all"
+            >&nbsp;</code
+          >
+          <span
+            data-field="badge"
+            class="hidden shrink-0 rounded-full border border-[oklch(0.62_0.10_150/0.4)] bg-[oklch(0.62_0.10_150/0.08)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[oklch(0.42_0.10_150)]"
+          >
+            {t("determinism_proof_match")}
+          </span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button type="button" data-action="clear" class="btn-ghost">
+          {t("determinism_action_clear")}
+        </button>
+        <button type="button" data-action="recompute" class="btn-primary">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-4 w-4"
+            aria-hidden="true"
+          >
+            <path d="M3 12a9 9 0 0 1 15.5-6.3L21 8"></path>
+            <path d="M21 3v5h-5"></path>
+            <path d="M21 12a9 9 0 0 1-15.5 6.3L3 16"></path>
+            <path d="M3 21v-5h5"></path>
+          </svg>
+          {t("determinism_action_recompute")}
+        </button>
+      </div>
+
+      <p class="m-0 text-pretty text-sm leading-relaxed text-(--color-ink-3)">
+        {t("determinism_caption")}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .caret {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    margin-left: 2px;
+    background: var(--color-ink-1);
+    vertical-align: -0.15em;
+    animation: caret-blink 1s steps(2) infinite;
+  }
+  @keyframes caret-blink {
+    50% {
+      background: transparent;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Scripted demo of determinism. The fields type themselves, the
+   * derived password appears, the user can clear or recompute. The
+   * "derivation" is a tiny SHA-256 → base64 just to give a stable, real
+   * value — the real Argon2id flow lives in #try below.
+   */
+  const card = document.getElementById("determinism-card") as HTMLElement | null;
+  if (card !== null) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const master = card.dataset.master!;
+    const site = card.dataset.site!;
+    const email = card.dataset.email!;
+    const fields = {
+      master: card.querySelector('[data-field="master"]') as HTMLElement,
+      site: card.querySelector('[data-field="site"]') as HTMLElement,
+      email: card.querySelector('[data-field="email"]') as HTMLElement,
+      output: card.querySelector('[data-field="output"]') as HTMLElement,
+      badge: card.querySelector('[data-field="badge"]') as HTMLElement,
+    };
+    const btnClear = card.querySelector('[data-action="clear"]') as HTMLButtonElement;
+    const btnRecompute = card.querySelector('[data-action="recompute"]') as HTMLButtonElement;
+
+    const ALPHABET =
+      "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%^&*-_+=?";
+    async function derive(): Promise<string> {
+      const data = new TextEncoder().encode(`${master}|${site}|${email}`);
+      const digest = await crypto.subtle.digest("SHA-256", data);
+      const bytes = new Uint8Array(digest);
+      let out = "";
+      for (let i = 0; i < 24; i++) out += ALPHABET[bytes[i]! % ALPHABET.length];
+      return out;
+    }
+
+    function setField(el: HTMLElement, value: string) {
+      el.textContent = value || "·";
+    }
+
+    async function type(el: HTMLElement, value: string, speed = 26) {
+      if (reduced) {
+        setField(el, value);
+        return;
+      }
+      setField(el, "");
+      for (let i = 1; i <= value.length; i++) {
+        setField(el, value.slice(0, i));
+        await new Promise((r) => setTimeout(r, speed));
+      }
+    }
+
+    let derived = "";
+
+    async function play(markIdentical: boolean) {
+      btnClear.disabled = true;
+      btnRecompute.disabled = true;
+      fields.badge.classList.add("hidden");
+      fields.output.textContent = " ";
+
+      await type(fields.master, master, 24);
+      await type(fields.site, site, 30);
+      await type(fields.email, email, 22);
+
+      fields.output.textContent = reduced ? "" : "·".repeat(24);
+      await new Promise((r) => setTimeout(r, reduced ? 0 : 320));
+
+      const next = await derive();
+      const isMatch = derived !== "" && next === derived;
+      derived = next;
+      fields.output.textContent = next;
+      if (markIdentical && isMatch) {
+        fields.badge.classList.remove("hidden");
+        btnRecompute.textContent = btnRecompute.dataset.again ?? btnRecompute.textContent;
+      }
+      btnClear.disabled = false;
+      btnRecompute.disabled = false;
+    }
+
+    function clear() {
+      setField(fields.master, "");
+      setField(fields.site, "");
+      setField(fields.email, "");
+      fields.output.textContent = " ";
+      fields.badge.classList.add("hidden");
+    }
+
+    btnRecompute.dataset.again = btnRecompute.textContent?.trim() ?? "";
+    btnClear.addEventListener("click", () => {
+      clear();
+      derived = "";
+    });
+    btnRecompute.addEventListener("click", () => play(true));
+
+    // Auto-play on first view
+    if ("IntersectionObserver" in window) {
+      let played = false;
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (!played && entries[0]!.isIntersecting) {
+            played = true;
+            play(false);
+            io.disconnect();
+          }
+        },
+        { threshold: 0.4 }
+      );
+      io.observe(card);
+    } else {
+      play(false);
+    }
+  }
+</script>

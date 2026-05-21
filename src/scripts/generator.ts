@@ -36,7 +36,7 @@ export function mountGenerator(opts: MountOptions): void {
   let profile: Profile = { ...DEFAULT_RANDOM_PROFILE };
   let busy = false;
   let result: string | null = null;
-  let revealed = false;
+  let revealed = true;
   let copied = false;
   let error: string | null = null;
   let debounceTimer: number | null = null;
@@ -111,7 +111,6 @@ export function mountGenerator(opts: MountOptions): void {
     if (debounceTimer !== null) window.clearTimeout(debounceTimer);
     // Show a spinner / placeholder while typing so the UI stays responsive.
     result = null;
-    revealed = false;
     copied = false;
     error = null;
     paintError();

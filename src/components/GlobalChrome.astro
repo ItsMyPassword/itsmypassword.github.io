@@ -38,19 +38,11 @@ const t = useT(locale);
   </div>
 </div>
 
-<div
-  id="cursor"
-  aria-hidden="true"
-  class="pointer-events-none fixed top-0 left-0 z-[1000] h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-(--color-ink-1)/60 [mix-blend-mode:difference] opacity-100 transition-opacity duration-200"
->
-</div>
-
 <script>
   /**
-   * Hide the system cursor for the whole site and follow the mouse with
-   * the ring. We also publish the position on `window.__mouse` so any
-   * canvas (the hero's dot grid) can read it without registering its own
-   * listener.
+   * Publish the mouse position on `window.__mouse` so the hero's dot
+   * grid can read it without registering its own listener. The system
+   * cursor is left visible — no custom ring anymore.
    */
   declare global {
     interface Window {
@@ -58,27 +50,19 @@ const t = useT(locale);
     }
   }
 
-  document.documentElement.style.cursor = "none";
-  document.body.style.cursor = "none";
-
-  const cursor = document.getElementById("cursor")!;
-  const state = (window.__mouse = {
+  const state: { x: number; y: number; active: boolean } = {
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
     active: false,
-  });
+  };
+  window.__mouse = state;
 
   window.addEventListener("mousemove", (event) => {
     state.x = event.clientX;
     state.y = event.clientY;
     state.active = true;
-    cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%)`;
   });
   window.addEventListener("mouseleave", () => {
     state.active = false;
-    cursor.style.opacity = "0.4";
-  });
-  window.addEventListener("mouseenter", () => {
-    cursor.style.opacity = "1";
   });
 </script>

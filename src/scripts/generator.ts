@@ -1,11 +1,12 @@
 /**
- * Client-side password generator. Mounted by TryPage.astro on the /try
- * route. Pure DOM manipulation — no framework, so no integration risk and
- * the bundle is just the crypto modules + this file.
+ * Client-side password generator. Mounted into the home page's "Try it"
+ * section. Pure DOM manipulation — no framework, so no integration risk
+ * and the bundle is just the crypto modules + this file.
  *
- * UI state lives in plain variables; we re-render minimal regions of the
- * DOM by toggling classes and writing textContent rather than reconciling
- * a virtual tree.
+ * Domain normalisation matches the extension: the raw input is passed
+ * through `registrableDomain()` (PSL-aware via tldts) before being fed
+ * to the KDF, so `accounts.google.com` and `google.com` derive the same
+ * password — same behaviour you'd get from the extension on either tab.
  */
 import { derivePassword } from "~/lib/crypto/derive.js";
 import {
@@ -14,6 +15,7 @@ import {
   type MemorableProfile,
   type Profile,
 } from "~/lib/crypto/types.js";
+import { registrableDomain } from "~/lib/domain.js";
 
 type Strings = Record<string, string>;
 
@@ -119,10 +121,14 @@ export function mountGenerator(opts: MountOptions): void {
     busy = true;
     paintBusy();
     try {
+      // Normalise the typed domain exactly like the extension does, so the
+      // browser demo and the extension produce the same password for the
+      // same site.
+      const domain = registrableDomain(siteEl.value);
       const pw = await derivePassword({
         inputs: {
           master: masterEl.value,
-          domain: siteEl.value.trim(),
+          domain,
           email: emailEl.value.trim(),
         },
         profile,

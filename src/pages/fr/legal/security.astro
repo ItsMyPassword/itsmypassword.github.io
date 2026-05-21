@@ -1,0 +1,107 @@
+---
+import LegalPage from "~/components/LegalPage.astro";
+---
+
+<LegalPage locale="fr" title="Sécurité & divulgation" lastUpdated="2026-05-20" path="/legal/security">
+  <p>
+    ItsMyPassword est un outil sensible à la sécurité. Cette page résume le
+    modèle de menace pour lequel l'extension est conçue et la procédure
+    pour signaler une vulnérabilité.
+  </p>
+
+  <h2>Modèle de menace</h2>
+  <p>
+    L'extension est conçue pour vous protéger contre les menaces suivantes :
+  </p>
+  <ul>
+    <li>
+      <strong>Fuites de coffre.</strong> Il n'y a pas de coffre. Les mots
+      de passe dérivés sont calculés à la demande et jamais stockés.
+    </li>
+    <li>
+      <strong>Compromission d'un service de synchronisation.</strong>
+      L'extension ne synchronise rien vers un service distant. Les données
+      locales restent sur l'appareil.
+    </li>
+    <li>
+      <strong>Observateurs réseau.</strong> L'extension n'effectue aucun
+      appel réseau.
+    </li>
+    <li>
+      <strong>Mots de passe réutilisés entre sites.</strong> Les mots de
+      passe dérivés sont uniques par site par construction ; une fuite
+      sur un site ne peut donc pas être rejouée sur un autre.
+    </li>
+  </ul>
+  <p>
+    L'extension <strong>ne</strong> protège <strong>pas</strong> contre :
+  </p>
+  <ul>
+    <li>
+      Un appareil compromis — un keylogger ou un logiciel malveillant
+      s'exécutant avec vos droits utilisateur peut lire votre mot de
+      passe maître pendant que vous le tapez.
+    </li>
+    <li>
+      Un mot de passe maître faible — un attaquant par force brute qui
+      récupère un mot de passe dérivé sur un site fuité et connaît les
+      entrées email/domaine peut tenter de récupérer le maître hors
+      ligne. Argon2id élève considérablement le coût, mais un maître
+      court ou commun reste récupérable.
+    </li>
+    <li>
+      Le phishing — l'extension remplit les mots de passe sur l'onglet
+      actif, y compris sur des domaines similaires. Vérifiez la barre
+      d'URL avant de remplir.
+    </li>
+  </ul>
+
+  <h2>Cryptographie</h2>
+  <p>
+    La dérivation utilise <a
+      href="https://datatracker.ietf.org/doc/html/rfc9106"
+      target="_blank"
+      rel="noopener noreferrer">Argon2id (RFC 9106)</a
+    >, la fonction mémoire-intensive recommandée par l'OWASP pour le
+    hachage de mots de passe. Paramètres : 3 itérations, 64 Mio de
+    mémoire, parallélisme 1, sortie de 32 octets. Le sel est construit à
+    partir du domaine racine du site, de l'email utilisé sur ce site et
+    d'un compteur par site. La sortie est ensuite mise en forme pour
+    correspondre au profil du site.
+  </p>
+
+  <h2>Signaler une vulnérabilité</h2>
+  <p>
+    Si vous pensez avoir trouvé une vulnérabilité de sécurité dans
+    l'extension, le site ou la construction cryptographique, signalez-la
+    en privé plutôt que d'ouvrir un ticket public.
+  </p>
+  <ul>
+    <li>
+      Utilisez le signalement privé de vulnérabilité de GitHub : <a
+        href="https://github.com/ItsMyPassword/extension/security/advisories/new"
+        target="_blank"
+        rel="noopener noreferrer">github.com/ItsMyPassword/extension/security/advisories/new</a
+      >.
+    </li>
+    <li>
+      Incluez une description claire, les étapes de reproduction et la
+      version concernée (visible dans le panneau « À propos » de
+      l'extension).
+    </li>
+    <li>
+      Nous accusons réception des nouveaux signalements sous 7 jours et
+      visons un correctif sous 90 jours après confirmation. La
+      divulgation coordonnée est appréciée.
+    </li>
+  </ul>
+
+  <h2>Builds reproductibles</h2>
+  <p>
+    Les versions de l'extension sont taguées dans le dépôt, et le bundle
+    publié sur le Chrome Web Store est construit à partir du tag
+    correspondant. Pour vérifier une version vous-même, faites un checkout
+    du tag, lancez la commande de build documentée et comparez le bundle
+    résultant à celui publié par le store.
+  </p>
+</LegalPage>

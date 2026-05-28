@@ -106,7 +106,7 @@ const structuredData = {
        * work is bounded by the number of decorated elements.
        */
       const targets = document.querySelectorAll<HTMLElement>(
-        "[data-reveal], [data-reveal-stagger]"
+        "[data-reveal], [data-reveal-stagger]",
       );
       if (targets.length > 0 && "IntersectionObserver" in window) {
         const io = new IntersectionObserver(
@@ -118,7 +118,7 @@ const structuredData = {
               }
             }
           },
-          { rootMargin: "0px 0px -15% 0px", threshold: 0.12 }
+          { rootMargin: "0px 0px -15% 0px", threshold: 0.12 },
         );
         targets.forEach((el) => io.observe(el));
       } else {

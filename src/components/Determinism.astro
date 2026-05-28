@@ -28,16 +28,13 @@ const examples = [
 ];
 ---
 
-<section
-  id="determinism"
-  class="relative isolate border-t border-(--color-ink-5) px-6 py-32"
->
-  <div class="mx-auto grid w-full max-w-6xl grid-cols-1 gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-16">
+<section id="determinism" class="relative isolate border-t border-(--color-ink-5) px-6 py-32">
+  <div
+    class="mx-auto grid w-full max-w-6xl grid-cols-1 gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-16"
+  >
     <header data-reveal class="flex max-w-2xl flex-col gap-4">
       <span class="mono-tag">{t("determinism_tag")}</span>
-      <h2
-        class="m-0 text-4xl font-semibold tracking-[-0.025em] text-(--color-ink-0) sm:text-5xl"
-      >
+      <h2 class="m-0 text-4xl font-semibold tracking-[-0.025em] text-(--color-ink-0) sm:text-5xl">
         {t("determinism_title")}
       </h2>
       <p class="m-0 text-pretty text-(--color-ink-2) sm:text-lg">
@@ -186,7 +183,7 @@ const examples = [
    */
   type Example = { master: string; site: string; email: string };
 
-  const card = document.getElementById("determinism-card") as HTMLElement | null;
+  const card = document.getElementById("determinism-card") as HTMLElement;
   if (card !== null) {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const examples = JSON.parse(card.dataset.examples ?? "[]") as Example[];
@@ -203,8 +200,7 @@ const examples = [
     const btnClear = card.querySelector('[data-action="clear"]') as HTMLButtonElement;
     const btnRecompute = card.querySelector('[data-action="recompute"]') as HTMLButtonElement;
 
-    const ALPHABET =
-      "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%^&*-_+=?";
+    const ALPHABET = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%^&*-_+=?";
     async function derive(ex: Example): Promise<string> {
       const data = new TextEncoder().encode(`${ex.master}|${ex.site}|${ex.email}`);
       const digest = await crypto.subtle.digest("SHA-256", data);
@@ -349,7 +345,7 @@ const examples = [
             scheduleNext();
           }
         },
-        { threshold: 0.4 }
+        { threshold: 0.4 },
       );
       io.observe(card);
     } else {

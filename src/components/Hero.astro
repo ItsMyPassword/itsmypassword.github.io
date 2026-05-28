@@ -34,124 +34,135 @@ const t = useT(locale);
     class="relative z-[2] mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16"
   >
     <div class="flex flex-col items-center gap-10 lg:items-center">
-    <div
-      id="keycapWrap"
-      class="relative grid h-[156px] w-[156px] place-items-center [animation:var(--animate-breathe)]"
-    >
       <div
-        class="pointer-events-none absolute inset-[-60%] rounded-full blur-lg [animation:var(--animate-halo)]"
-        style="background: radial-gradient(circle at 50% 50%, oklch(0.95 0.006 260 / 0.10) 0%, oklch(0.85 0.006 260 / 0.05) 28%, transparent 60%);"
+        id="keycapWrap"
+        class="relative grid h-[156px] w-[156px] place-items-center [animation:var(--animate-breathe)]"
       >
-      </div>
-      <div
-        id="keycap"
-        class="relative grid h-[116px] w-[116px] place-items-center rounded-[18px] transition-transform duration-200"
-        style="background: linear-gradient(180deg, oklch(0.30 0.004 260) 0%, oklch(0.22 0.004 260) 60%, oklch(0.16 0.004 260) 100%); box-shadow: 0 18px 30px oklch(0 0 0 / 0.55), 0 4px 0 oklch(0.07 0.004 260), 0 6px 0 oklch(0.05 0.004 260), inset 0 1px 0 oklch(0.55 0.004 260 / 0.6), inset 0 -2px 0 oklch(0.06 0.004 260 / 0.9), inset 0 0 0 1px oklch(0.34 0.004 260 / 0.4);"
-      >
-        <span
-          aria-hidden="true"
-          class="absolute inset-2 rounded-[12px]"
-          style="background: radial-gradient(ellipse 110% 90% at 50% 20%, oklch(0.42 0.004 260 / 0.6) 0%, transparent 60%), linear-gradient(180deg, oklch(0.26 0.004 260) 0%, oklch(0.18 0.004 260) 100%); box-shadow: inset 0 1px 0 oklch(0.50 0.004 260 / 0.45), inset 0 -1px 0 oklch(0.06 0.004 260 / 0.9);"
-        ></span>
-        <span
-          aria-hidden="true"
-          class="pointer-events-none absolute top-2.5 right-3 left-3 h-[22%]"
-          style="border-radius: 12px 12px 80% 80% / 12px 12px 100% 100%; background: linear-gradient(180deg, oklch(0.95 0.004 260 / 0.18) 0%, oklch(0.95 0.004 260 / 0.02) 100%);"
-        ></span>
-        <span
-          class="relative z-10 block leading-none"
-          style="filter: drop-shadow(0 1px 0 oklch(0.06 0.004 260 / 0.9)) drop-shadow(0 0 14px oklch(0.95 0.004 260 / 0.18)); color: oklch(0.92 0.003 260);"
+        <div
+          class="pointer-events-none absolute inset-[-60%] rounded-full blur-lg [animation:var(--animate-halo)]"
+          style="background: radial-gradient(circle at 50% 50%, oklch(0.95 0.006 260 / 0.10) 0%, oklch(0.85 0.006 260 / 0.05) 28%, transparent 60%);"
         >
-          <svg viewBox="0 0 100 100" class="h-12 w-12" fill="currentColor" aria-hidden="true">
-            <path
-              d="m70 10.9h-60.2c-4.4 0.1-8.1 4-8 8.7v60.8c0 4.5 3.4 8.7 8.3 8.7h59.9c4.3 0 8.7-3.4 8.7-8.7v-60.8c-0.1-4.2-3.7-8.6-8.7-8.7zm3.9 70.6c-0.5 1.4-1.9 2.7-3.9 2.7h-60.1c-1.9-0.1-3.3-1.4-3.8-3.5v-61.1c0.1-1.9 1.8-3.8 3.9-3.9h60c2.2 0 3.9 1.9 4 3.8v60.9l-0.1 1.1z"
-            ></path>
-            <path
-              d="m91.6 42.7c-3.7-0.3-7.5 2.4-7.5 7.1-0.1 3.6 2.5 7.5 7.3 7.6 3.5 0 7-2.8 7-7.4 0.1-3.6-2.9-6.9-6.8-7.3z"
-            ></path>
-            <rect x="19.1" y="33.2" width="3.4" height="33"></rect>
-          </svg>
-        </span>
+        </div>
+        <div
+          id="keycap"
+          class="relative grid h-[116px] w-[116px] place-items-center rounded-[18px] transition-transform duration-200"
+          style="background: linear-gradient(180deg, oklch(0.30 0.004 260) 0%, oklch(0.22 0.004 260) 60%, oklch(0.16 0.004 260) 100%); box-shadow: 0 18px 30px oklch(0 0 0 / 0.55), 0 4px 0 oklch(0.07 0.004 260), 0 6px 0 oklch(0.05 0.004 260), inset 0 1px 0 oklch(0.55 0.004 260 / 0.6), inset 0 -2px 0 oklch(0.06 0.004 260 / 0.9), inset 0 0 0 1px oklch(0.34 0.004 260 / 0.4);"
+        >
+          <span
+            aria-hidden="true"
+            class="absolute inset-2 rounded-[12px]"
+            style="background: radial-gradient(ellipse 110% 90% at 50% 20%, oklch(0.42 0.004 260 / 0.6) 0%, transparent 60%), linear-gradient(180deg, oklch(0.26 0.004 260) 0%, oklch(0.18 0.004 260) 100%); box-shadow: inset 0 1px 0 oklch(0.50 0.004 260 / 0.45), inset 0 -1px 0 oklch(0.06 0.004 260 / 0.9);"
+          ></span>
+          <span
+            aria-hidden="true"
+            class="pointer-events-none absolute top-2.5 right-3 left-3 h-[22%]"
+            style="border-radius: 12px 12px 80% 80% / 12px 12px 100% 100%; background: linear-gradient(180deg, oklch(0.95 0.004 260 / 0.18) 0%, oklch(0.95 0.004 260 / 0.02) 100%);"
+          ></span>
+          <span
+            class="relative z-10 block leading-none"
+            style="filter: drop-shadow(0 1px 0 oklch(0.06 0.004 260 / 0.9)) drop-shadow(0 0 14px oklch(0.95 0.004 260 / 0.18)); color: oklch(0.92 0.003 260);"
+          >
+            <svg viewBox="0 0 100 100" class="h-12 w-12" fill="currentColor" aria-hidden="true">
+              <path
+                d="m70 10.9h-60.2c-4.4 0.1-8.1 4-8 8.7v60.8c0 4.5 3.4 8.7 8.3 8.7h59.9c4.3 0 8.7-3.4 8.7-8.7v-60.8c-0.1-4.2-3.7-8.6-8.7-8.7zm3.9 70.6c-0.5 1.4-1.9 2.7-3.9 2.7h-60.1c-1.9-0.1-3.3-1.4-3.8-3.5v-61.1c0.1-1.9 1.8-3.8 3.9-3.9h60c2.2 0 3.9 1.9 4 3.8v60.9l-0.1 1.1z"
+              ></path>
+              <path
+                d="m91.6 42.7c-3.7-0.3-7.5 2.4-7.5 7.1-0.1 3.6 2.5 7.5 7.3 7.6 3.5 0 7-2.8 7-7.4 0.1-3.6-2.9-6.9-6.8-7.3z"
+              ></path>
+              <rect x="19.1" y="33.2" width="3.4" height="33"></rect>
+            </svg>
+          </span>
+        </div>
       </div>
-    </div>
 
-    <div
-      id="stream"
-      aria-hidden="true"
-      class="relative h-[168px] overflow-hidden"
-      style="width: min(560px, 80vw); -webkit-mask: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%), linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); -webkit-mask-composite: source-in; mask: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%), linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); mask-composite: intersect;"
-    >
-    </div>
+      <div
+        id="stream"
+        aria-hidden="true"
+        class="relative h-[168px] overflow-hidden"
+        style="width: min(560px, 80vw); -webkit-mask: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%), linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); -webkit-mask-composite: source-in; mask: linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%), linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%); mask-composite: intersect;"
+      >
+      </div>
     </div>
 
     <div class="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
-    <div class="relative">
-      <h1
-        class="headline-gradient m-0 font-extrabold tracking-[-0.045em] leading-[0.95]"
-        style="font-size: clamp(48px, 6.4vw, 88px);"
-      >
-        {t("hero_headline")}
-      </h1>
-      <span
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-[-8%_-2%] [mix-blend-mode:overlay] [animation:var(--animate-sheen)]"
-        style="background: linear-gradient(105deg, transparent 35%, oklch(1 0 0 / 0.08) 50%, transparent 65%);"
-      >
-      </span>
-    </div>
-
-    <p class="m-0 max-w-xl text-balance text-(--color-ink-2) sm:text-lg">
-      {t("hero_subtitle")}
-    </p>
-
-    <div class="status-pill">
-      <span
-        class="block h-1.5 w-1.5 rounded-full bg-[oklch(0.62_0.10_150)] shadow-[0_0_8px_oklch(0.62_0.10_150/0.7)] [animation:var(--animate-pulse-dot)]"
-      ></span>
-      <span>{t("hero_status")}</span>
-    </div>
-
-    <div class="mt-2 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-      <a href="#try" class="btn-primary">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="h-4 w-4"
-          aria-hidden="true"
+      <div class="relative">
+        <h1
+          class="headline-gradient m-0 font-extrabold tracking-[-0.045em] leading-[0.95]"
+          style="font-size: clamp(48px, 6.4vw, 88px);"
         >
-          <path d="M13 2 4.5 13.5h6L11 22l8.5-11.5h-6L13 2Z"></path>
-        </svg>
-        {t("hero_cta_try")}
-      </a>
-      <a
-        href="https://github.com/Keyfount/extension"
-        class="btn-ghost relative"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true">
-          <rect x="3" y="6" width="14" height="12" rx="2"></rect>
-          <path d="M17 10h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"></path>
-          <path d="M7 10v8"></path>
-        </svg>
-        {t("hero_cta_install")}
-        <span class="ml-1 rounded-full border border-(--color-ink-5) px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-(--color-ink-3)">
-          {t("hero_cta_install_soon")}
+          {t("hero_headline")}
+        </h1>
+        <span
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-[-8%_-2%] [mix-blend-mode:overlay] [animation:var(--animate-sheen)]"
+          style="background: linear-gradient(105deg, transparent 35%, oklch(1 0 0 / 0.08) 50%, transparent 65%);"
+        >
         </span>
-      </a>
-      <a
-        href="https://github.com/Keyfount/extension"
-        class="text-sm font-medium tracking-tight text-(--color-ink-3) underline-offset-4 transition-colors hover:text-(--color-ink-0) hover:underline"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {t("hero_cta_source")}
-      </a>
-    </div>
+      </div>
+
+      <p class="m-0 max-w-xl text-balance text-(--color-ink-2) sm:text-lg">
+        {t("hero_subtitle")}
+      </p>
+
+      <div class="status-pill">
+        <span
+          class="block h-1.5 w-1.5 rounded-full bg-[oklch(0.62_0.10_150)] shadow-[0_0_8px_oklch(0.62_0.10_150/0.7)] [animation:var(--animate-pulse-dot)]"
+        ></span>
+        <span>{t("hero_status")}</span>
+      </div>
+
+      <div class="mt-2 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+        <a href="#try" class="btn-primary">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-4 w-4"
+            aria-hidden="true"
+          >
+            <path d="M13 2 4.5 13.5h6L11 22l8.5-11.5h-6L13 2Z"></path>
+          </svg>
+          {t("hero_cta_try")}
+        </a>
+        <a
+          href="https://github.com/Keyfount/extension"
+          class="btn-ghost relative"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-4 w-4"
+            aria-hidden="true"
+          >
+            <rect x="3" y="6" width="14" height="12" rx="2"></rect>
+            <path d="M17 10h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"></path>
+            <path d="M7 10v8"></path>
+          </svg>
+          {t("hero_cta_install")}
+          <span
+            class="ml-1 rounded-full border border-(--color-ink-5) px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-(--color-ink-3)"
+          >
+            {t("hero_cta_install_soon")}
+          </span>
+        </a>
+        <a
+          href="https://github.com/Keyfount/extension"
+          class="text-sm font-medium tracking-tight text-(--color-ink-3) underline-offset-4 transition-colors hover:text-(--color-ink-0) hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("hero_cta_source")}
+        </a>
+      </div>
     </div>
   </div>
 </section>

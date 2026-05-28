@@ -266,14 +266,22 @@ export function mountGenerator(opts: MountOptions): void {
     if (result === null) {
       resultValue.textContent = "—";
       resultValue.classList.add("text-(--color-ink-4)");
-      resultValue.classList.remove("text-(--color-ink-0)", "text-(--color-ink-3)", "tracking-[0.15em]");
+      resultValue.classList.remove(
+        "text-(--color-ink-0)",
+        "text-(--color-ink-3)",
+        "tracking-[0.15em]",
+      );
       revealBtn.textContent = s.tryReveal;
       copyBtn.textContent = s.tryCopy;
       return;
     }
     if (revealed) {
       resultValue.textContent = result;
-      resultValue.classList.remove("tracking-[0.15em]", "text-(--color-ink-3)", "text-(--color-ink-4)");
+      resultValue.classList.remove(
+        "tracking-[0.15em]",
+        "text-(--color-ink-3)",
+        "text-(--color-ink-4)",
+      );
       resultValue.classList.add("text-(--color-ink-0)");
     } else {
       resultValue.textContent = "•".repeat(Math.min(result.length, 32));

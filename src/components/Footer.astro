@@ -14,7 +14,11 @@ const local = pathHelper(locale);
 
 const links = [
   { label: t("footer_extension"), href: "https://github.com/Keyfount/extension", external: true },
-  { label: t("footer_website"), href: "https://github.com/Keyfount/keyfount.github.io", external: true },
+  {
+    label: t("footer_website"),
+    href: "https://github.com/Keyfount/keyfount.github.io",
+    external: true,
+  },
   { label: t("footer_org"), href: "https://github.com/Keyfount", external: true },
 ];
 const legalLinks = [
@@ -28,9 +32,7 @@ const year = new Date().getFullYear();
 
 <footer class="relative isolate border-t border-(--color-ink-5) px-6 py-12">
   <div class="mx-auto flex w-full max-w-5xl flex-col gap-10">
-    <div
-      class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center"
-    >
+    <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
       <div class="flex items-center gap-3">
         <span class="grid h-7 w-7 place-items-center rounded-md text-(--color-ink-0)">
           <svg viewBox="0 0 100 100" class="h-5 w-5" fill="currentColor" aria-hidden="true">
@@ -73,10 +75,7 @@ const year = new Date().getFullYear();
       <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-(--color-ink-3)">
         {
           legalLinks.map((link) => (
-            <a
-              href={link.href}
-              class="transition-colors hover:text-(--color-ink-0)"
-            >
+            <a href={link.href} class="transition-colors hover:text-(--color-ink-0)">
               {link.label}
             </a>
           ))
